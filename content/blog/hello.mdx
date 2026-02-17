@@ -25,3 +25,62 @@ Lumma Stealer biasanya menggunakan CAPTCHA palsu untuk menipu targetnya, dan CAP
 ![demo](https://ik.imagekit.io/qualys/wp-content/uploads/2024/10/image1.png)
 Pelaku seringkali membuat situs phising yang dihosting dan memanfaatkan Content Delivery Network (CDN). Situs-situs ini menggunakan teknik social engineering dimana user sendiri yang akan mengklik "umpan" pelaku, sehingga payload akan dijalankan di komputer mereka
 
+## Bedah Alur Serangan Dengan Cyber Kill Chain
+### 1. Reconnaissance
+Sebelum korban melihat CAPTCHA palsu, penyerang sudah lebih dulu mempersiapkan medan.
+Mereka memahami kebiasaan pengguna internet: mencari software gratis, crack, generator, atau file tertentu melalui mesin pencari. Dengan teknik seperti SEO poisoning dan malvertising, mereka memastikan situs berbahaya muncul di hasil pencarian.
+Pada tahap ini, belum ada malware yang dikirim. Fokusnya adalah menarik lalu lintas.
+
+Aktivitas yang terjadi pada tahap ini:
+- Identifikasi target umum (pengguna Windows, crypto user, gamer).
+- Pembuatan situs tiruan atau kompromi situs legitimate.
+- Optimalisasi kata kunci agar muncul di hasil pencarian.
+- Penyebaran iklan berbahaya (malvertising).
+
+Reconnaissance di sini lebih bersifat psikologis dan strategis daripada teknis.
+### 2. Weaponization
+Setelah lalu lintas korban diarahkan, penyerang menyiapkan “senjata”. Namun senjata ini tidak dikemas dalam file executable langsung.
+Mereka menggabungkan beberapa komponen.
+Komponen weaponization:
+
+- JavaScript untuk manipulasi clipboard.
+- Perintah PowerShell atau mshta sebagai loader.
+- Binary Lumma Stealer yang telah diobfuscate.
+- Infrastruktur server untuk hosting payload.
+
+Pendekatan ini memecah proses infeksi menjadi beberapa tahap agar menghindari deteksi awal. Malware utama baru diunduh setelah korban mengeksekusi perintah tertentu.
+### 3. Delivery
+Korban diarahkan ke halaman yang tampak seperti verifikasi manusia biasa. Namun alih-alih meminta klik gambar atau memilih objek tertentu, halaman tersebut memberikan instruksi aneh: tekan Win + R, tempelkan teks, lalu tekan Enter.
+
+Secara teknis, skrip di halaman tersebut sudah menyalin perintah berbahaya ke clipboard korban. Tanpa menyadari apa yang terjadi, korban mengeksekusi perintah remote melalui PowerShell.
+
+Di sinilah letak kekuatan teknik ini: tidak ada eksploitasi celah sistem, tidak ada file berbahaya yang diklik secara eksplisit. Yang terjadi adalah manipulasi psikologis. CAPTCHA, simbol keamanan digital, dijadikan alat untuk menurunkan kewaspadaan korban.
+### 4. Exploitation
+Dalam banyak serangan siber klasik, exploitation berarti memanfaatkan vulnerability pada sistem atau aplikasi. Namun pada Konteks Lumma ini, yang dieksploitasi bukanlah Windows, melainkan perilaku pengguna.
+
+Begitu korban menjalankan perintah tersebut, PowerShell mengunduh payload dari server attacker dan mengeksekusinya. Tidak ada zero-day exploit. Tidak ada buffer overflow. Yang ada hanyalah korban yang tanpa sadar menjalankan perintah yang diberikan.
+
+Ini menunjukkan pergeseran paradigma ancaman modern: manusia menjadi permukaan serangan utama.
+### 5. Installation
+Setelah payload berhasil dijalankan, Lumma Stealer mulai membangun pijakan permanen.
+
+Malware biasanya menyimpan dirinya di direktori seperti AppData atau Temp, kemudian memodifikasi registry atau membuat scheduled task untuk memastikan ia tetap aktif setelah sistem direstart. Pada tahap ini, kompromi sudah stabil.
+
+Korban mungkin tidak merasakan apa pun. Tidak ada pop-up mencurigakan. Tidak ada crash sistem. Semua berjalan normal - sementara data mulai dikumpulkan di latar belakang.
+### 6. Command & Control
+Dengan foothold yang sudah tertanam, Lumma Stealer mulai menjalankan fungsinya sebagai information stealer.
+
+Password browser, cookies, session token, informasi wallet crypto, dan data sistem dikumpulkan lalu dikirim ke server Command & Control (C2). Komunikasi ini sering dienkripsi dan menggunakan infrastruktur yang berubah-ubah untuk menghindari deteksi.
+
+Di tahap ini, penyerang tidak lagi membutuhkan interaksi korban. Semua proses berjalan otomatis.
+### 7. Action on Objectives
+Tahap akhir berfokus pada tujuan ekonomi.
+
+Data yang dicuri tidak berhenti di server attacker. Ia dapat:
+
+- Dijual sebagai “log” di forum underground.
+- Digunakan untuk account takeover.
+- Dimanfaatkan untuk pengurasan aset kripto.
+- Menjadi pintu masuk kompromi lanjutan terhadap organisasi.
+
+Karena Lumma sering dijalankan dalam model Malware-as-a-Service, satu infeksi dapat berdampak luas dan berulang.
