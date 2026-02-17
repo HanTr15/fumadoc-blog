@@ -24,14 +24,14 @@ export default async function Page({
         <InlineTOC items={page.data.toc}>Table of Contents</InlineTOC>
       </div>
       <div className="space-y-8"></div>
-      <PostActions />
-      <h1 className="text-4xl font-bold mb-6">
+       <h1 className="text-4xl font-bold mb-6">
         {page.data.title}
       </h1>
 
       <h1 className="text-1xl mb-6">
         {page.data.description}
       </h1>
+      <PostActions />
 
       <div className="prose dark:prose-invert max-w-none">
         <MDX
