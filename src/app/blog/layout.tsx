@@ -1,12 +1,6 @@
-import { DocsLayout } from 'fumadocs-ui/layouts/flux';
+import { HomeLayout } from 'fumadocs-ui/layouts/home';
 import { baseOptions } from '@/lib/layout.shared';
-import { blogSource } from '@/lib/source';
-import type { ReactNode } from 'react';
 
-export default function Layout({ children }: { children: ReactNode }) {
-  return (
-    <DocsLayout {...baseOptions()} tree={blogSource.getPageTree()}>
-      {children}
-    </DocsLayout>
-  );
+export default function Layout({ children }: LayoutProps<'/'>) {
+  return <HomeLayout {...baseOptions()}>{children}</HomeLayout>;
 }

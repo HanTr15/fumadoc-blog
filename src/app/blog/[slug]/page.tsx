@@ -2,9 +2,8 @@ import { blogSource } from "@/lib/source";
 import { notFound } from "next/navigation";
 import { getMDXComponents } from "@/mdx-components";
 import { createRelativeLink } from "fumadocs-ui/mdx";
-import { DocsPage } from 'fumadocs-ui/layouts/docs/page';
 import { InlineTOC } from 'fumadocs-ui/components/inline-toc';
-
+import { PostActions } from "@/components/PostActions";
 
 export default async function Page({
   params,
@@ -20,12 +19,18 @@ export default async function Page({
   const MDX = page.data.body;
 
   return (
-    <DocsPage>
-      <InlineTOC items={page.data.toc}>Table of Contents</InlineTOC>
-  
-    <div className="max-w-3xl mx-auto px-6 py-20">
+    <div className="max-w-3xl mx-auto px-6 pt-5 py-20">
+      <div className="mb-8">
+        <InlineTOC items={page.data.toc}>Table of Contents</InlineTOC>
+      </div>
+      <div className="space-y-8"></div>
+      <PostActions />
       <h1 className="text-4xl font-bold mb-6">
         {page.data.title}
+      </h1>
+
+      <h1 className="text-1xl mb-6">
+        {page.data.description}
       </h1>
 
       <div className="prose dark:prose-invert max-w-none">
@@ -36,7 +41,6 @@ export default async function Page({
         />
       </div>
     </div>
-      </DocsPage>
   );
 }
 
