@@ -1,9 +1,12 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
-import { ArrowLeft, Share2 } from "lucide-react";
+import { ArrowLeft, Share2, Check } from "lucide-react";
 
 export function PostActions() {
+  const [copied, setCopied] = useState(false);
+
   const handleShare = async () => {
     const url = window.location.href;
 
@@ -12,28 +15,37 @@ export function PostActions() {
         title: document.title,
         url,
       });
-    } else {
-      await navigator.clipboard.writeText(url);
-      alert("Link copied!");
+      return;
     }
+
+    await navigator.clipboard.writeText(url);
+    setCopied(true);
+
+    setTimeout(() => {
+      setCopied(false);
+    }, 2000);
   };
 
   return (
     <div className="flex items-center gap-3 mb-8">
       <Link
         href="/blog"
-        className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-sm"
+        className="inline-flex text-white items-center gap-2 px-4 py-2 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-sm"
       >
-        <ArrowLeft size={16} />
+        <ArrowLeft size={16}/>
         Back
       </Link>
 
       <button
         onClick={handleShare}
-        className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-yellow-400 text-black font-medium text-sm hover:opacity-90"
+        className={`inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition ${
+          copied
+            ? "bg-green-500 text-white"
+            : "bg-yellow-400 text-black hover:opacity-90"
+        }`}
       >
-        <Share2 size={16} />
-        Share Post
+        {copied ? <Check size={16} /> : <Share2 size={16} />}
+        {copied ? "Copied!" : "Share Post"}
       </button>
     </div>
   );
