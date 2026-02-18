@@ -22,14 +22,12 @@ export default async function Page(props: PageProps<'/docs/[[...slug]]'>) {
         <DocsTitle className="text-3xl font-bold tracking-tight">
           {page.data.title}
         </DocsTitle>
-
         {page.data.description && (
           <DocsDescription className="text-muted-foreground text-base">
             {page.data.description}
           </DocsDescription>
         )}
       </div>
-
       <DocsBody className="prose prose-neutral dark:prose-invert max-w-none pt-8">
         <MDX
           components={getMDXComponents({
@@ -38,6 +36,7 @@ export default async function Page(props: PageProps<'/docs/[[...slug]]'>) {
         />
       </DocsBody>
     </DocsPage>
+
   );
 
 }

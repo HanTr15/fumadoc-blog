@@ -1,0 +1,347 @@
+---
+title: Bandit Lv 1-20
+description: Bandit adalah salah satu kategori wargames yang ada di OverTheWire disini kita akan banyak belajar mengenai command command linux
+---
+<Callout>
+Tantangan ini banyak meggunakan SSH  
+Username yang digunakan menyesuaikan dengan level yang dituju contoh:  
+level 1 = bandit1  
+level 2 = bandit2  
+untuk password dapat ditemukan dari tantangan di level sebelumnya
+</Callout>
+## Level 0 
+Untuk menyelesaikan level, kamu perlu mengkoneksikan dengan server bandit menggunakan SSH
+```bash title="ssh"
+ssh username@host -p port
+``` 
+password yang telah di beri untuk level0 ```bandit0```
+```bash title="ssh"
+❯ ssh bandit0@bandit.labs.overthewire.org -p 2220
+The authenticity of host '[bandit.labs.overthewire.org]:2220 ([51.21.210.216]:2220)' can't be established.
+ED25519 key fingerprint is: SHA256:C2ihUBV7ihnV1wUXRb4RrEcLfXC5CXlhmAAM/urerLY
+This key is not known by any other names.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added '[bandit.labs.overthewire.org]:2220' (ED25519) to the list of known hosts.
+                         _                     _ _ _   
+                        | |__   __ _ _ __   __| (_) |_ 
+                        | '_ \ / _` | '_ \ / _` | | __|
+                        | |_) | (_| | | | | (_| | | |_ 
+                        |_.__/ \__,_|_| |_|\__,_|_|\__|
+                                                       
+
+                      This is an OverTheWire game server. 
+            More information on http://www.overthewire.org/wargames
+
+backend: gibson-1
+bandit0@bandit.labs.overthewire.org's password: 
+
+      ,----..            ,----,          .---.
+     /   /   \         ,/   .`|         /. ./|
+    /   .     :      ,`   .'  :     .--'.  ' ;
+   .   /   ;.  \   ;    ;     /    /__./ \ : |
+  .   ;   /  ` ; .'___,/    ,' .--'.  '   \' .
+  ;   |  ; \ ; | |    :     | /___/ \ |    ' '
+  |   :  | ; | ' ;    |.';  ; ;   \  \;      :
+  .   |  ' ' ' : `----'  |  |  \   ;  `      |
+  '   ;  \; /  |     '   :  ;   .   \    .\  ;
+   \   \  ',  /      |   |  '    \   \   ' \ |
+    ;   :    /       '   :  |     :   '  |--"
+     \   \ .'        ;   |.'       \   \ ;
+  www. `---` ver     '---' he       '---" ire.org
+
+
+Welcome to OverTheWire!
+
+bandit0@bandit:~$ 
+```
+
+<Callout>
+The password for the next level is stored in a file called readme located in the home directory. Use this password to log into bandit1 using SSH. Whenever you find a password for a level, use SSH (on port 2220) to log into that level and continue the game.
+</Callout>
+untuk menyelesaikannya kita hanya perlu menggunakan
+- ls = melihat list file
+- cat = melihat isi file
+```bash title="bandit0@bandit:~"
+bandit0@bandit:~$ ls
+readme
+bandit0@bandit:~$ cat readme
+Congratulations on your first steps into the bandit game!!
+Please make sure you have read the rules at https://overthewire.org/rules/
+If you are following a course, workshop, walkthrough or other educational activity,
+please inform the instructor about the rules as well and encourage them to
+contribute to the OverTheWire community so we can keep these games free!
+
+The password you are looking for is: ZjLjTmM6FvvyRnrb2rfNWOZOTa6ip5If
+```
+
+ini adalah password SSH untuk ke level selanjutnya **ZjLjTmM6FvvyRnrb2rfNWOZOTa6ip5If**
+
+---
+## Level 1
+<Callout>
+The password for the next level is stored in a file called - located in the home directory 
+</Callout>
+```bash title="ssh"
+❯ ssh bandit1@bandit.labs.overthewire.org -p 2220
+
+bandit1@bandit:~$ cat ./-
+263JGJPfgU6LtdEvgfWU1XP5yac29mFx
+bandit1@bandit:~$ 
+```
+
+jika nama file diawali dengan simbol, di linux kita bisa menambahkan 
+```./``` agar shell tidak salah mengira simbol yang ada di nama file memiliki arti lain
+
+---
+## Level 2
+<Callout>
+The password for the next level is stored in a file called --spaces in this filename-- located in the home directory
+</Callout>
+```bash title="bandit2"
+❯ ssh bandit2@bandit.labs.overthewire.org -p 2220
+
+bandit2@bandit:~$ ls
+--spaces in this filename--
+bandit2@bandit:~$ cat ./--spaces\ in\ this\ filename-- 
+MNk8KNH3Usiio41PRUEoDFPqfxLPlSmx
+```
+file di level ini memiliki simbol diawal namanya dan juga ada spasi, sehingga kita bisa menggunakan ```./``` untuk simbolnya, kemudian menggunakan ```\``` untuk setiap spasi yang ada
+
+---
+## Level 3
+<Callout>
+The password for the next level is stored in a hidden file in the inhere directory.
+</Callout>
+```bash title="bandit3"
+❯ ssh bandit3@bandit.labs.overthewire.org -p 2220
+
+bandit3@bandit:~$ ls
+inhere
+bandit3@bandit:~$ cd inhere
+bandit3@bandit:~/inhere$ ls
+bandit3@bandit:~/inhere$ ls -la 
+total 12
+drwxr-xr-x 2 root    root    4096 Oct 14 09:26 .
+drwxr-xr-x 3 root    root    4096 Oct 14 09:26 ..
+-rw-r----- 1 bandit4 bandit3   33 Oct 14 09:26 ...Hiding-From-You
+bandit3@bandit:~/inhere$ cat ...Hiding-From-You 
+2WmrDFRmJIq3IPxneAaMGhap0pFhF3NJ
+```
+di linux file yang berawalan ```.``` akan disembunyikan, jika kita hanya mencoba ```ls``` file tersebut tidak akan muncul, kita perlu menambahkan ```-la``` untuk melihat semua folder/file tersembunyi tersebut
+
+---
+## Level 4
+<Callout>
+The password for the next level is stored in the only human-readable file in the inhere directory. Tip: if your terminal is messed up, try the “reset” command.
+</Callout>
+```bash title="bandit4"
+❯ ssh bandit4@bandit.labs.overthewire.org -p 2220
+
+bandit4@bandit:~$ ls  
+inhere
+bandit4@bandit:~$ cd inhere
+bandit4@bandit:~/inhere$ ls -la
+total 48
+drwxr-xr-x 2 root    root    4096 Oct 14 09:26 .
+drwxr-xr-x 3 root    root    4096 Oct 14 09:26 ..
+-rw-r----- 1 bandit5 bandit4   33 Oct 14 09:26 -file00
+-rw-r----- 1 bandit5 bandit4   33 Oct 14 09:26 -file01
+-rw-r----- 1 bandit5 bandit4   33 Oct 14 09:26 -file02
+-rw-r----- 1 bandit5 bandit4   33 Oct 14 09:26 -file03
+-rw-r----- 1 bandit5 bandit4   33 Oct 14 09:26 -file04
+-rw-r----- 1 bandit5 bandit4   33 Oct 14 09:26 -file05
+-rw-r----- 1 bandit5 bandit4   33 Oct 14 09:26 -file06
+-rw-r----- 1 bandit5 bandit4   33 Oct 14 09:26 -file07
+-rw-r----- 1 bandit5 bandit4   33 Oct 14 09:26 -file08
+-rw-r----- 1 bandit5 bandit4   33 Oct 14 09:26 -file09
+bandit4@bandit:~/inhere$ file ./-file0*
+./-file00: data
+./-file01: data
+./-file02: data
+./-file03: data
+./-file04: data
+./-file05: data
+./-file06: data
+./-file07: ASCII text
+./-file08: data
+./-file09: data
+bandit4@bandit:~/inhere$ cat ./-file07
+4oQYVPkxZOOEOO5pTW81FB8j8lxXGUQw
+```
+di linux kita bisa menggunakan syntax ```file``` untuk melihat tipe dari suatu file, kemudian kita bisa menambahkan wildcard dibagian akhir nama ```-file0``` ```*``` agar secara otomatis membaca file yang memiliki pola nama yang sama yaitu berawalan ```-file0```  
+    
+dari syntax tersebut dapat diketahui hanya ada 1 file yang bertipe ASCII text, dimana ASCII hanya terdiri dari angka, huruf, simbol biasa, yang dapat dibaca manusia
+
+---
+## Level 5
+<Callout>
+The password for the next level is stored in a file somewhere under the inhere directory and has all of the following properties:  
+human-readable  
+1033 bytes in size  
+not executable
+</Callout>
+```bash title="bandit5"
+❯ ssh bandit5@bandit.labs.overthewire.org -p 2220
+
+bandit5@bandit:~$ ls
+inhere
+bandit5@bandit:~$ cd inhere/
+bandit5@bandit:~/inhere$ ls
+maybehere00  maybehere02  maybehere04  maybehere06  maybehere08  maybehere10  maybehere12  maybehere14  maybehere16  maybehere18
+maybehere01  maybehere03  maybehere05  maybehere07  maybehere09  maybehere11  maybehere13  maybehere15  maybehere17  maybehere19
+bandit5@bandit:~/inhere$ find ./ -type f -readable ! -executable -size 1033c
+./maybehere07/.file2
+bandit5@bandit:~/inhere$ cat ./maybehere07/.file2
+HWasnPhtq9AVKe0dmk45nxy20cvUa6EG
+```
+di linux ada syntax yang sangat berguna jika kita ingin mencari file dengan spesifik yaitu ```find``` disini saya menggunakan beberapa parameter di command tersebut :
+<Tabs items={['./', '-type f', '-readable', '!-executable', '-size 1033c']}>
+  <Tab value="./">Untuk mendeklarasikan bahwa kita mencari file itu di directory yang dipilih saat ini</Tab>
+  <Tab value="-type f">Mencari tipe file biasa</Tab>
+  <Tab value="-readable">untuk mendeklarasikan bahwa file tersebut dapat di lihat/baca oleh user saat ini</Tab>
+  <Tab value="!-executable">file tidak (!) dapat di execut</Tab>
+  <Tab value="-size 1033c">-size digunakan untuk mencari ukuran file dan disini ukuran di set di angka 1033c ```c``` = ```bytes``` </Tab>
+</Tabs>
+dengan syntax tersebut dapat diketahui bahwa ada 1 file yang memenuhi kriteria yaitu ```./maybehere07/.file2```
+
+---
+
+## Level 6
+<Callout>
+The password for the next level is stored somewhere on the server and has all of the following properties:  
+owned by user bandit7  
+owned by group bandit6  
+33 bytes in size
+</Callout>
+```bash title="bandit6"
+❯ ssh bandit6@bandit.labs.overthewire.org -p 2220
+
+bandit6@bandit:~$ ls
+bandit6@bandit:~$ ls -la 
+total 20
+drwxr-xr-x   2 root root 4096 Oct 14 09:25 .
+drwxr-xr-x 150 root root 4096 Oct 14 09:29 ..
+-rw-r--r--   1 root root  220 Mar 31  2024 .bash_logout
+-rw-r--r--   1 root root 3851 Oct 14 09:19 .bashrc
+-rw-r--r--   1 root root  807 Mar 31  2024 .profile
+bandit6@bandit:~$ find / -type f -size 33c -group bandit6 -user bandit7 2>&1 | grep -v "Permission denied"
+find: ‘/proc/19/task/19/fdinfo/6’: No such file or directory
+find: ‘/proc/19/fdinfo/5’: No such file or directory
+/var/lib/dpkg/info/bandit7.password
+bandit6@bandit:~$ cat /var/lib/dpkg/info/bandit7.password
+morbNTDkSW6jIlUc0ymOdMaLnOlFVAaj
+```
+dapat dilihat sebelumnya saya telah mencoba menggunakan ```ls -la``` namun hasil yang keluar bukanlah file yang kita inginkan, sehingga disini kita bisa menggunakan syntax ```find``` lagi seperti level sebelumnya, dengan beberapa parameter:
+<Tabs items={['/', '-type f',  '-size 33c', '-group bandit6', '-user bandit7', '2>&1', '| grep -v']}>
+  <Tab value="/">Untuk mencari file itu dari directory root jadi ini akan menscan seluruh filesystem</Tab>
+  <Tab value="-type f">Mencari tipe file biasa</Tab>
+  <Tab value="-size 33c">-size digunakan untuk mencari ukuran file dan disini ukuran di set di angka 33c ```c``` = ```bytes``` </Tab>
+  <Tab value="-group bandit6">untuk mecari group file itu adalah bandit6</Tab>
+  <Tab value="-user bandit7">owner file adalah bandit7</Tab>
+  <Tab value="2>&1">redirect stream error (stderr) ke stdout, artinya upstream error seperti ```Permission denied``` akan dialihkan ke pipe</Tab>
+  <Tab value="| grep -v">stderr dari parameter sebelumnya dikirim ke pipe ```|``` dan kemudian diteruskan ke ```grep -v``` ini berfungsi untuk menampilkan semua output kecuali ```Permission denied```</Tab>
+</Tabs>
+```bash
+find / -type f -size 33c -group bandit6 -user bandit7 2>&1 | grep -v "Permission denied"
+```
+
+---
+## Level 7
+<Callout>
+The password for the next level is stored in the file data.txt next to the word millionth
+</Callout>
+```bash title="bandit7"
+❯ ssh bandit7@bandit.labs.overthewire.org -p 2220
+
+bandit7@bandit:~$ ls
+data.txt
+bandit7@bandit:~$ cat data.txt | grep "millionth"
+millionth	dfwvzFQi4mU0wfNbFOe9RoWskMLg7eEc
+```
+disini data.txt berisi banyak sekali kata dan dari soal dapat diketahui bahwa password berada setelah kata ```millionth``` sehingga kita bisa menggunakan ```grep``` untuk memfilter output, yang hanya mengandung kata ```millionth```
+
+---
+## Level 8
+<Callout>
+The password for the next level is stored in the file data.txt and is the only line of text that occurs only once
+</Callout>
+```bash title="bandit8"
+bandit8@bandit:~$ ls
+data.txt
+bandit8@bandit:~$ sort data.txt | uniq -c | grep "1 "
+      1 4CKMh1JI91bUIZZPXDqGanal4xvAg0JM
+     ......
+```
+sesuai clue bahwa password hanya muncul satu kali di file tersebut, atau bisa dikatan memiliki keunikan, jadi kita bisa menggunakan
+```sort data.txt | uniq -c | grep "1 "``` lihat tab dibawah untuk penjelasan masing masing syntax:
+<Tabs items={['sort', 'uniq -c',  'grep 1']}>
+  <Tab value="sort">berfungsi untuk mengurutkan isi file ```data.txt``` karena syntax ```uniq``` hanya bekerja pada baris yang urut</Tab>
+  <Tab value="uniq -c">```uniq``` untuk menghapus baris yang sama/duplikat, ```-c``` untuk menghitung jumlah kemunculan</Tab>
+  <Tab value="grep 1">karena sebelumnya kita menggunakan ```uniq -c``` dimana akan muncul output hasil perhitungan jumlah kemunculan, kita bisa grep angka 1, dimana itu artinya kita mencari kata yang hanya muncul 1 kali</Tab>
+</Tabs>
+
+---
+## Level 9
+<Callout>
+The password for the next level is stored in the file data.txt in one of the few human-readable strings, preceded by several ‘=’ characters.
+</Callout>
+```bash title="bandit9"
+❯ ssh bandit9@bandit.labs.overthewire.org -p 2220
+
+bandit9@bandit:~$ ls
+data.txt
+bandit9@bandit:~$ strings data.txt | grep "=="
+========== the
+========== password
+E========== is
+5========== FGUW5ilLVJrxX9kMYMmlN4MgbpfMiqey
+```
+sesuai soal dapat diketahui bahwa soal berada di strings yang dapat dibaca manusia, dan diawali dengan beberapa simbol ```=```
+jadi untuk menemukannya kita bisa menggunakan syntax ```strings``` untuk mengeluarkan output strings yang dapat dibaca manusia kemudian diikuti dengan ```grep "=="``` untuk mencari simbol ```=``` yang lebih dari 1
+
+---
+## Level 10
+<Callout>
+The password for the next level is stored in the file data.txt, which contains base64 encoded data
+</Callout>
+```bash title="bandit10"
+❯ ssh bandit10@bandit.labs.overthewire.org -p 2220
+
+bandit10@bandit:~$ ls
+data.txt
+bandit10@bandit:~$ cat data.txt
+VGhlIHBhc3N3b3JkIGlzIGR0UjE3M2ZaS2IwUlJzREZTR3NnMlJXbnBOVmozcVJyCg==
+bandit10@bandit:~$ cat data.txt | base64 -d
+The password is 2
+```
+di level ini kita akan belajar mengenai cryptography, dimana password yang tersimpan di file ```data.txt``` telah di encode
+<Callout>
+**encode** adalah proses dimana sebuah data diubah ke format lain agar mudah digunakan atau dikirim
+</Callout>
+data yang ada di level ini memiliki simbol ```=``` dua kali dan diawali dengan huruf besar ini merupakan ciri-ciri dari format encoding base64
+untuk mengembalikan data tersebut ke format aslinya, kita bisa menambahkan pipe dan format encodingnya di syntax ```| base64 -d```
+<Callout>
+```-d``` mengartikan **decode** yang merupakan istilah proses mengembalikan data yang telah di encode ke bentuk semula
+</Callout>
+
+---
+## Level 11
+<Callout>
+The password for the next level is stored in the file data.txt, where all lowercase (a-z) and uppercase (A-Z) letters have been rotated by 13 positions
+</Callout>
+```bash title="bandit11"
+❯ ssh bandit11@bandit.labs.overthewire.org -p 2220
+
+bandit11@bandit:~$ ls  
+data.txt
+bandit11@bandit:~$ cat data.txt | tr 'A-Za-z' 'N-ZA-Mn-za-m'
+The password is 7x16WNeHIi5YkIhWsfFIqoognUTyj9Q4
+```
+di level ini kita belajar mengenai cryptography lagi, kali ini kita berfokus pada salah satu metode enkripsi paling sederhana yaitu rot13, dapat diketahui dari soal ada (rotated by 13 positions)
+<Callout>
+**enkripsi** adalah metode untuk melindungi data sensitif agar tidak bisa dibaca oleh pihak tidak berwenang
+</Callout>
+metode ini menggunakan pergeseran sebanyak 13 karakter, jika menggunakan metode ini maka ```A = N | B = O``` dan seterusnya
+untuk mengembalikan/mendekripsi ke bentuk aslinya kita bisa menggunakan syntax ```tr 'A-Za-z' 'N-ZA-Mn-za-m'``` di linux
+dimana fungsi syntax ```tr``` (translate) adalah untuk mengganti karakter sesuai yang kita ingin  
+dimana di level ini kita mengganti ```A-Za-z``` huruf A sampai Z baik yang besar/kecil ke mapping rot13 ```N-ZA-Mn-za-m```
