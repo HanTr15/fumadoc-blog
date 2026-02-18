@@ -5,6 +5,9 @@ import { Inter } from 'next/font/google';
 const inter = Inter({
   subsets: ['latin'],
 });
+export const metadata = {
+  metadataBase: new URL("http://localhost:3000"),
+};
 
 export default function Layout({ children }: LayoutProps<'/'>) {
   return (
