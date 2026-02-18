@@ -345,3 +345,60 @@ metode ini menggunakan pergeseran sebanyak 13 karakter, jika menggunakan metode 
 untuk mengembalikan/mendekripsi ke bentuk aslinya kita bisa menggunakan syntax ```tr 'A-Za-z' 'N-ZA-Mn-za-m'``` di linux
 dimana fungsi syntax ```tr``` (translate) adalah untuk mengganti karakter sesuai yang kita ingin  
 dimana di level ini kita mengganti ```A-Za-z``` huruf A sampai Z baik yang besar/kecil ke mapping rot13 ```N-ZA-Mn-za-m```
+
+---
+## Level 12
+<Callout>
+The password for the next level is stored in the file data.txt, which is a hexdump of a file that has been repeatedly compressed. For this level it may be useful to create a directory under /tmp in which you can work. Use mkdir with a hard to guess directory name. Or better, use the command “mktemp -d”. Then copy the datafile using cp, and rename it using mv (read the manpages!)
+</Callout>
+```bash title="bandit12"
+❯ ssh bandit12@bandit.labs.overthewire.org -p 2220
+
+# Buat folder baru sementara
+bandit12@bandit:~$ mkdir /tmp/ax
+bandit12@bandit:~$ cp data.txt /tmp/ax
+bandit12@bandit:~$ cd /tmp/ax
+# Convert hexdump ke binary
+bandit12@bandit:/tmp/ax$ xxd -r data.txt data.out
+bandit12@bandit:/tmp/ax$ file data.out
+data.out: gzip compressed data, was "data2.bin", last modified: Tue Oct 16 12:00:23 2018, max compression, from Unix
+bandit12@bandit:/tmp/ax$ mv data.out data.gz
+bandit12@bandit:/tmp/ax$ gzip -d data.gz 
+bandit12@bandit:/tmp/ax$ file data
+data: bzip2 compressed data, block size = 900k
+bandit12@bandit:/tmp/ax$ bzip2 -d data
+bzip2: Can\'t guess original name for data -- using data.out
+bandit12@bandit:/tmp/ax$ file data.out
+data.out: gzip compressed data, was "data4.bin", last modified: Tue Oct 16 12:00:23 2018, max compression, from Unix
+bandit12@bandit:/tmp/ax$ mv data.out data.gz
+bandit12@bandit:/tmp/ax$ gzip -d data.gz
+bandit12@bandit:/tmp/ax$ file data
+data: POSIX tar archive (GNU)
+bandit12@bandit:/tmp/ax$ tar -xf data
+bandit12@bandit:/tmp/ax$ file data5.bin
+data5.bin: POSIX tar archive (GNU)
+bandit12@bandit:/tmp/ax$ tar -xf data5.bin
+bandit12@bandit:/tmp/ax$ file data6.bin
+data6.bin: bzip2 compressed data, block size = 900k
+bandit12@bandit:/tmp/ax$ bzip2 -d data6.bin
+bzip2: Can\'t guess original name for data6.bin -- using data6.bin.out
+bandit12@bandit:/tmp/ax$ file data6.bin.out
+data6.bin.out: POSIX tar archive (GNU)
+bandit12@bandit:/tmp/ax$ tar -xf data6.bin.out
+bandit12@bandit:/tmp/ax$ file data8.bin
+data8.bin: gzip compressed data, was "data9.bin", last modified: Tue Oct 16 12:00:23 2018, max compression, from Unix
+bandit12@bandit:/tmp/ax$ mv data8.bin data8.gz
+bandit12@bandit:/tmp/ax$ gzip -d data8.gz
+# ulangi terus sampai tipe data file tersebut menjadi ASCII
+bandit12@bandit:/tmp/ax$ file data8
+data8: ASCII text
+bandit12@bandit:/tmp/ax$ cat data8
+The password is FO5dwFsc0cbaIiH0h8J2eUks2vdTDwAn
+```
+syntax ```-r``` pada ```xxd``` digunakan untuk mengembalikan hexdump menjadi file biner aslinya. Setelah file berhasil dipulihkan, kita menggunakan syntax ```file``` untuk mengidentifikasi jenis file berdasarkan signature-nya (magic bytes). Karena file tersebut dikompresi berkali-kali, kita harus mengeceknya berulang kali dan mengekstraknya dengan tool seperti gzip, bzip2, atau tar, sampai akhirnya diperoleh file ASCII yang berisi password.
+
+---
+## Level 13
+<Callout>
+The password for the next level is stored in /etc/bandit_pass/bandit14 and can only be read by user bandit14. For this level, you don’t get the next password, but you get a private SSH key that can be used to log into the next level. Look at the commands that logged you into previous bandit levels, and find out how to use the key for this level.
+</Callout>

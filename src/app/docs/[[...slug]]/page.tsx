@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation';
 import { getMDXComponents } from '@/mdx-components';
 import type { Metadata } from 'next';
 import { createRelativeLink } from 'fumadocs-ui/mdx';
+import { PostActions } from "@/components/PostActions";
 
 export default async function Page(props: PageProps<'/docs/[[...slug]]'>) {
   const params = await props.params;
@@ -26,7 +27,9 @@ export default async function Page(props: PageProps<'/docs/[[...slug]]'>) {
           <DocsDescription className="text-muted-foreground text-base">
             {page.data.description}
           </DocsDescription>
+
         )}
+        <PostActions />
       </div>
       <DocsBody className="prose prose-neutral dark:prose-invert max-w-none pt-8">
         <MDX
