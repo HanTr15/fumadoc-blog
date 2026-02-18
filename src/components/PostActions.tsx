@@ -29,11 +29,11 @@ export function PostActions() {
   return (
     <div className="flex items-center gap-3 mb-8">
       <Link
-        href="/blog"
+        href="/"
         className="inline-flex text-white items-center gap-2 px-4 py-2 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-sm"
       >
         <ArrowLeft size={16}/>
-        Back
+        Home
       </Link>
 
       <button
