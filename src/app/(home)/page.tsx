@@ -72,7 +72,7 @@ export default function HomePage() {
                 2000,
                 "Also Known As ryosta",
                 2000,
-                "Cyber Security Enthusiast",
+                "Welcome To My personal blog",
                 2000,
               ]}
               speed={50}
@@ -82,7 +82,7 @@ export default function HomePage() {
         </h1>
 
         <p className="mt-6 text-zinc-600 dark:text-zinc-400 max-w-2xl mx-auto">
-          I share about cybersecurity, CTF writeup, and my other activities.
+          I share content about cybersecurity, CTF writeups, networking, and my ongoing learning journey in the field.
         </p>
 
         {/* SOCIALS */}
@@ -131,14 +131,18 @@ export default function HomePage() {
 
             <p className="text-lg leading-relaxed">
               I'm Hamdan Trisnawan, also known as ryosta. A student deeply interested in
-              Cyber Security and software development. I enjoy breaking systems
-              to understand how they work - then rebuilding them better and more secure.
+              Networking and Cyber Security. I enjoy analyzing infrastructures,
+              understanding how systems communicate, and exploring security weaknesses
+              to make them stronger and more resilient.
             </p>
 
             <p className="mt-6 text-zinc-600 dark:text-zinc-400">
-              Active in programming, security research, system analysis,
-              and Capture The Flag competitions to sharpen my mindset.
+              Actively learning about network engineering, system security,
+              penetration testing, and Capture The Flag challenges to sharpen
+              my analytical and defensive mindset. I also explore software
+              development as a complementary skill to support my security journey.
             </p>
+
           </div>
         </div>
       </section>

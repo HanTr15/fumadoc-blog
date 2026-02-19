@@ -2,15 +2,77 @@ import { blogSource } from "@/lib/source";
 import { notFound } from "next/navigation";
 import { getMDXComponents } from "@/mdx-components";
 import { createRelativeLink } from "fumadocs-ui/mdx";
-import { InlineTOC } from 'fumadocs-ui/components/inline-toc';
+import { InlineTOC } from "fumadocs-ui/components/inline-toc";
 import { PostActions } from "@/components/PostActions";
+import type { Metadata } from "next";
 
-export default async function Page({
+type Props = {
+  params: Promise<{ slug: string }>; // Next 16
+};
+
+export async function generateMetadata({
   params,
-}: {
-  params: Promise<{ slug: string }>;
-}) {
-  const { slug } = await params; // ← WAJIB di Next 16
+}: Props): Promise<Metadata> {
+  const { slug } = await params;
+
+  const page = blogSource.getPage([slug]);
+
+  if (!page) return {};
+  <script
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{
+      __html: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "Article",
+        headline: page.data.title,
+        description: page.data.description,
+        author: {
+          "@type": "Person",
+          name: "Hamdan Trisnawan",
+        },
+        datePublished: page.data.date,
+        url: `https://ryosta.my.id/blog/${slug}`,
+      }),
+    }}
+  />
+
+  return {
+    title: page.data.title,
+    description: page.data.description,
+    keywords: [
+      "PNETLab",
+      "iShare2",
+      "Network Lab",
+      "VirtualBox",
+      "Cyber Security",
+      "Networking",
+    ],
+    authors: [{ name: "Hamdan Trisnawan" }],
+    openGraph: {
+      title: page.data.title,
+      description: page.data.description,
+      type: "article",
+      publishedTime: page.data.date,
+      url: `https://ryosta.my.id/blog/${slug}`,
+      images: [
+        {
+          url: "/og.png",
+          width: 1200,
+          height: 630,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: page.data.title,
+      description: page.data.description,
+      images: ["/og.png"],
+    },
+  };
+}
+
+export default async function Page({ params }: Props) {
+  const { slug } = await params;
 
   const page = blogSource.getPage([slug]);
 
@@ -21,16 +83,19 @@ export default async function Page({
   return (
     <div className="max-w-3xl mx-auto px-6 pt-5 py-20">
       <div className="mb-8">
-        <InlineTOC items={page.data.toc}>Table of Contents</InlineTOC>
+        <InlineTOC items={page.data.toc}>
+          Table of Contents
+        </InlineTOC>
       </div>
-      <div className="space-y-8"></div>
-       <h1 className="text-4xl font-bold mb-6">
+
+      <h1 className="text-4xl font-bold mb-6">
         {page.data.title}
       </h1>
 
-      <h1 className="text-1xl mb-6">
+      <p className="text-lg text-muted-foreground mb-6">
         {page.data.description}
-      </h1>
+      </p>
+
       <PostActions />
 
       <div className="prose dark:prose-invert max-w-none">

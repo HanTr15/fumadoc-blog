@@ -1,0 +1,185 @@
+---
+title: Install PNET-Lab & iShare2
+description: Panduan lengkap instalasi PNETLab dan iShare2 secara lokal menggunakan VirtualBox
+date: "2025-02-16"
+---
+
+PNETLab adalah platform virtualisasi berbasis web yang digunakan untuk membuat, menguji, dan mempelajari berbagai topologi jaringan. Platform ini bekerja seperti emulator jaringan (mirip GNS3 atau EVE-NG), sehingga kita dapat menjalankan berbagai perangkat seperti Mikrotik, Cisco, Juniper, Ruijie, dan vendor lainnya secara virtual dalam satu environment lab.
+
+iShare2 adalah CLI helper tool untuk PNETLab yang memudahkan pengguna dalam mengunduh, memperbarui, dan mengelola image perangkat (.qcow2 / .vmdk) secara otomatis dari repository tanpa perlu upload manual.
+
+---
+
+# Install PNETLab di VirtualBox
+
+## 1. Download File OVA
+
+Gunakan versi berikut:
+
+<a href="https://drive.labhub.eu.org/0:/OVA/PNetLab/PNetLab-v.5.3.13.ova">PNetLab-v5.3.13.ova</a>
+
+Pastikan file berhasil terunduh sebelum lanjut ke tahap berikutnya.
+
+---
+
+## 2. Import OVA ke VirtualBox
+
+1. Buka VirtualBox  
+2. Klik **File → Import Appliance**  
+3. Pilih file OVA yang sudah didownload  
+4. Klik **Next → Import**  
+
+![Import OVA](/blog/pnet-install1.webp)
+![Import OVA Step](/blog/pnet-install2.webp)
+
+Tunggu hingga proses import selesai.
+
+---
+
+## 3. Konfigurasi Network Adapter
+
+Setelah VM berhasil diimport:
+
+1. Masuk ke **Settings**
+2. Pilih menu **Network**
+3. Pada **Adapter 1**, ubah menjadi:
+
+Bridge Adapter
+
+Mode Bridge digunakan agar VM mendapatkan IP dari jaringan yang sama dengan host.
+
+![Bridge Adapter](/blog/pnet-install3.webp)
+
+---
+
+## 4. Jalankan VM
+
+Start VM dan tunggu proses booting selesai.
+
+Setelah booting selesai, sistem akan menampilkan IP address dari PNETLab.  
+Catat IP tersebut karena akan digunakan untuk SSH dan akses web.
+
+![Booting IP Address](/blog/pnet-install4.webp)
+
+---
+
+# Install iShare2 di PNETLab
+
+## 1. Login via SSH
+
+Gunakan terminal (Linux/macOS) atau CMD/PowerShell (Windows):
+
+```bash
+ssh root@IP-PNETLAB
+```
+
+Password default:
+
+```bash
+pnet
+```
+
+![SSH Login](/blog/pnet-install5.webp)
+
+---
+
+## 2. Ganti Password Root
+
+Pada login pertama, sistem akan meminta kalian mengganti password root.
+
+Masukkan password baru sesuai keinginan.
+
+![Change Password](/blog/pnet-install6.webp)
+
+Pada tahap konfigurasi berikutnya, cukup tekan **ENTER** untuk menggunakan pengaturan default.
+
+![Config Step](/blog/pnet-install7.webp)
+![Config Step](/blog/pnet-install8.webp)
+![Config Step](/blog/pnet-install9.webp)
+
+Setelah konfigurasi selesai, VM akan melakukan reboot secara otomatis.
+
+---
+
+## 3. Jika Terjadi Error SSH (Host Identification Changed)
+
+Terkadang setelah reboot akan muncul error seperti:
+
+WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED!
+
+Hal ini terjadi karena fingerprint SSH berubah.
+
+Gunakan perintah berikut untuk menghapus key lama:
+
+```bash
+ssh-keygen -f '/home/username/.ssh/known_hosts' -R 'IP-PNETLAB'
+```
+
+Ganti:
+- `username` dengan username di komputer kalian
+- `IP-PNETLAB` dengan IP address PNETLab
+
+![SSH Error Fix](/blog/pnet-install10.webp)
+
+Setelah itu, coba login kembali via SSH.
+
+---
+
+## 4. Install iShare2
+
+Setelah berhasil login kembali, jalankan perintah berikut:
+
+```bash
+wget -O /usr/sbin/ishare2 https://raw.githubusercontent.com/pnetlabrepo/ishare2/main/ishare2 > /dev/null 2>&1 && chmod +x /usr/sbin/ishare2 && ishare2
+```
+
+![Install iShare2](/blog/pnet-install11.webp)
+
+Saat proses instalasi berlangsung:
+
+- Biarkan semua opsi menggunakan default
+- Tekan ENTER setiap kali muncul pilihan
+
+![iShare Wizard](/blog/pnet-install12.webp)
+
+Jika proses selesai tanpa error, berarti iShare2 telah berhasil terinstall.
+
+![iShare Installed](/blog/pnet-install13.webp)
+
+---
+
+## 5. Jika Repository Error
+
+Jika terjadi error repository, edit file berikut:
+
+```bash
+sudo nano /opt/ishare2/cli/sources.list
+```
+
+Ganti seluruh isinya dengan:
+
+```bash
+repo=https://repo.ishare2.top/
+```
+
+Simpan dengan:
+
+CTRL + X  
+Tekan Y  
+Tekan ENTER  
+
+![Edit Repository](/blog/pnet-install14.webp)
+
+---
+
+# Final Step
+
+Sekarang PNETLab telah siap digunakan dengan iShare2 terpasang.
+
+Buka browser dan akses:
+
+```
+http://IP-PNETLAB
+```
+
+Login melalui web interface dan mulai membuat lab jaringan sesuai kebutuhan kalian.

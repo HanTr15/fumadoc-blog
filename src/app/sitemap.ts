@@ -1,19 +1,32 @@
 import { MetadataRoute } from "next";
-import { docsSource } from "@/lib/source";
+import { docsSource, blogSource } from "@/lib/source";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const pages = docsSource.getPages();
+  const baseUrl = "https://ryosta.my.id";
 
-  const docsRoutes = pages.map((page) => ({
-    url: `https://ryosta.my.id/docs/${page.slugs.join("/")}`,
+  // Docs pages
+  const docsRoutes = docsSource.getPages().map((page) => ({
+    url: `${baseUrl}/docs/${page.slugs.join("/")}`,
     lastModified: new Date(),
   }));
 
+  // Blog pages
+  const blogRoutes = blogSource.getPages().map((page) => ({
+    url: `${baseUrl}/blog/${page.slugs.join("/")}`,
+    lastModified: page.data.date
+      ? new Date(page.data.date)
+      : new Date(),
+    changeFrequency: "weekly",
+    priority: 0.7,
+  }
+  ));
+
   return [
     {
-      url: "https://ryosta.my.id",
+      url: baseUrl,
       lastModified: new Date(),
     },
     ...docsRoutes,
+    ...blogRoutes,
   ];
 }
