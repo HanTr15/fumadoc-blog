@@ -11,11 +11,11 @@ untuk password dapat ditemukan dari tantangan di level sebelumnya
 </Callout>
 ## Level 0 
 Untuk menyelesaikan level, kamu perlu mengkoneksikan dengan server bandit menggunakan SSH
-```bash title="ssh"
+```bash
 ssh username@host -p port
 ``` 
 password yang telah di beri untuk level0 ```bandit0```
-```bash title="ssh"
+```bash
 ❯ ssh bandit0@bandit.labs.overthewire.org -p 2220
 The authenticity of host '[bandit.labs.overthewire.org]:2220 ([51.21.210.216]:2220)' can't be established.
 ED25519 key fingerprint is: SHA256:C2ihUBV7ihnV1wUXRb4RrEcLfXC5CXlhmAAM/urerLY
@@ -35,21 +35,6 @@ Warning: Permanently added '[bandit.labs.overthewire.org]:2220' (ED25519) to the
 backend: gibson-1
 bandit0@bandit.labs.overthewire.org's password: 
 
-      ,----..            ,----,          .---.
-     /   /   \         ,/   .`|         /. ./|
-    /   .     :      ,`   .'  :     .--'.  ' ;
-   .   /   ;.  \   ;    ;     /    /__./ \ : |
-  .   ;   /  ` ; .'___,/    ,' .--'.  '   \' .
-  ;   |  ; \ ; | |    :     | /___/ \ |    ' '
-  |   :  | ; | ' ;    |.';  ; ;   \  \;      :
-  .   |  ' ' ' : `----'  |  |  \   ;  `      |
-  '   ;  \; /  |     '   :  ;   .   \    .\  ;
-   \   \  ',  /      |   |  '    \   \   ' \ |
-    ;   :    /       '   :  |     :   '  |--"
-     \   \ .'        ;   |.'       \   \ ;
-  www. `---` ver     '---' he       '---" ire.org
-
-
 Welcome to OverTheWire!
 
 bandit0@bandit:~$ 
@@ -61,7 +46,7 @@ The password for the next level is stored in a file called readme located in the
 untuk menyelesaikannya kita hanya perlu menggunakan
 - ls = melihat list file
 - cat = melihat isi file
-```bash title="bandit0@bandit:~"
+```bash
 bandit0@bandit:~$ ls
 readme
 bandit0@bandit:~$ cat readme
@@ -81,7 +66,7 @@ ini adalah password SSH untuk ke level selanjutnya **ZjLjTmM6FvvyRnrb2rfNWOZOTa6
 <Callout>
 The password for the next level is stored in a file called - located in the home directory 
 </Callout>
-```bash title="ssh"
+```bash
 ❯ ssh bandit1@bandit.labs.overthewire.org -p 2220
 
 bandit1@bandit:~$ cat ./-
@@ -97,7 +82,7 @@ jika nama file diawali dengan simbol, di linux kita bisa menambahkan
 <Callout>
 The password for the next level is stored in a file called --spaces in this filename-- located in the home directory
 </Callout>
-```bash title="bandit2"
+```bash
 ❯ ssh bandit2@bandit.labs.overthewire.org -p 2220
 
 bandit2@bandit:~$ ls
@@ -112,7 +97,7 @@ file di level ini memiliki simbol diawal namanya dan juga ada spasi, sehingga ki
 <Callout>
 The password for the next level is stored in a hidden file in the inhere directory.
 </Callout>
-```bash title="bandit3"
+```bash
 ❯ ssh bandit3@bandit.labs.overthewire.org -p 2220
 
 bandit3@bandit:~$ ls
@@ -134,7 +119,7 @@ di linux file yang berawalan ```.``` akan disembunyikan, jika kita hanya mencoba
 <Callout>
 The password for the next level is stored in the only human-readable file in the inhere directory. Tip: if your terminal is messed up, try the “reset” command.
 </Callout>
-```bash title="bandit4"
+```bash
 ❯ ssh bandit4@bandit.labs.overthewire.org -p 2220
 
 bandit4@bandit:~$ ls  
@@ -180,7 +165,7 @@ human-readable
 1033 bytes in size  
 not executable
 </Callout>
-```bash title="bandit5"
+```bash
 ❯ ssh bandit5@bandit.labs.overthewire.org -p 2220
 
 bandit5@bandit:~$ ls
@@ -213,7 +198,7 @@ owned by user bandit7
 owned by group bandit6  
 33 bytes in size
 </Callout>
-```bash title="bandit6"
+```bash 
 ❯ ssh bandit6@bandit.labs.overthewire.org -p 2220
 
 bandit6@bandit:~$ ls
@@ -250,7 +235,7 @@ find / -type f -size 33c -group bandit6 -user bandit7 2>&1 | grep -v "Permission
 <Callout>
 The password for the next level is stored in the file data.txt next to the word millionth
 </Callout>
-```bash title="bandit7"
+```bash 
 ❯ ssh bandit7@bandit.labs.overthewire.org -p 2220
 
 bandit7@bandit:~$ ls
@@ -265,7 +250,7 @@ disini data.txt berisi banyak sekali kata dan dari soal dapat diketahui bahwa pa
 <Callout>
 The password for the next level is stored in the file data.txt and is the only line of text that occurs only once
 </Callout>
-```bash title="bandit8"
+```bash
 bandit8@bandit:~$ ls
 data.txt
 bandit8@bandit:~$ sort data.txt | uniq -c | grep "1 "
@@ -285,7 +270,7 @@ sesuai clue bahwa password hanya muncul satu kali di file tersebut, atau bisa di
 <Callout>
 The password for the next level is stored in the file data.txt in one of the few human-readable strings, preceded by several ‘=’ characters.
 </Callout>
-```bash title="bandit9"
+```bash
 ❯ ssh bandit9@bandit.labs.overthewire.org -p 2220
 
 bandit9@bandit:~$ ls
@@ -304,7 +289,7 @@ jadi untuk menemukannya kita bisa menggunakan syntax ```strings``` untuk mengelu
 <Callout>
 The password for the next level is stored in the file data.txt, which contains base64 encoded data
 </Callout>
-```bash title="bandit10"
+```bash
 ❯ ssh bandit10@bandit.labs.overthewire.org -p 2220
 
 bandit10@bandit:~$ ls
@@ -329,7 +314,7 @@ untuk mengembalikan data tersebut ke format aslinya, kita bisa menambahkan pipe 
 <Callout>
 The password for the next level is stored in the file data.txt, where all lowercase (a-z) and uppercase (A-Z) letters have been rotated by 13 positions
 </Callout>
-```bash title="bandit11"
+```bash
 ❯ ssh bandit11@bandit.labs.overthewire.org -p 2220
 
 bandit11@bandit:~$ ls  
@@ -351,7 +336,7 @@ dimana di level ini kita mengganti ```A-Za-z``` huruf A sampai Z baik yang besar
 <Callout>
 The password for the next level is stored in the file data.txt, which is a hexdump of a file that has been repeatedly compressed. For this level it may be useful to create a directory under /tmp in which you can work. Use mkdir with a hard to guess directory name. Or better, use the command “mktemp -d”. Then copy the datafile using cp, and rename it using mv (read the manpages!)
 </Callout>
-```bash title="bandit12"
+```bash
 ❯ ssh bandit12@bandit.labs.overthewire.org -p 2220
 
 # Buat folder baru sementara
@@ -402,3 +387,299 @@ syntax ```-r``` pada ```xxd``` digunakan untuk mengembalikan hexdump menjadi fil
 <Callout>
 The password for the next level is stored in /etc/bandit_pass/bandit14 and can only be read by user bandit14. For this level, you don’t get the next password, but you get a private SSH key that can be used to log into the next level. Look at the commands that logged you into previous bandit levels, and find out how to use the key for this level.
 </Callout>
+```bash
+❯ ssh bandit13@bandit.labs.overthewire.org -p 2220
+
+bandit13@bandit:~$ ls -la
+total 24
+drwxr-xr-x   2 root     root     4096 Oct 14 09:26 .
+drwxr-xr-x 150 root     root     4096 Oct 14 09:29 ..
+-rw-r--r--   1 root     root      220 Mar 31  2024 .bash_logout
+-rw-r--r--   1 root     root     3851 Oct 14 09:19 .bashrc
+-rw-r--r--   1 root     root      807 Mar 31  2024 .profile
+-rw-r-----   1 bandit14 bandit13 1679 Oct 14 09:26 sshkey.private
+bandit13@bandit:~$ exit
+logout
+Connection to bandit.labs.overthewire.org closed.
+❯ scp -P 2220 bandit13@bandit.labs.overthewire.org:sshkey.private .
+bandit13@bandit.labs.overthewire.org's password: 
+sshkey.private                        100% 1679     2.4KB/s   00:00    \
+❯ chmod 400 sshkey.private
+
+❯ ssh -i sshkey.private bandit14@bandit.labs.overthewire.org -p 2220 
+```
+di level ini password tidak disimpan dalam file/kata seperti level sebelumnya, melainkan disimpan langsung di dalam sshkey.private yang bisa langsung digunakan untuk login  
+jadi starteginya kita tinggal ambil sshkey.private menggunakan ```scp```
+<Callout>
+scp(secure copy) untuk mencopy file via SSH
+</Callout>
+- ```-P 2220``` → port SSH-nya (OverTheWire pakai 2220)
+- ```bandit13@bandit.labs.overthewire.org``` → user & host
+- ```sshkey.private``` → file yang mau diambil
+- ```.``` → simpan di folder lokal sekarang  
+selanjutnya kita ubah permision file tersebut, agar sesuai dengan standar keamanan SSH private key ```chmod 400 sshkey.private``` ini artinya owner bisa baca tapi orang lain tidak bisa melakukan apa apa ke file tersebut  
+setelahnya kita hanya tinggal masuk ke level selanjutnya dengan private key tadi ```ssh -i sshkey.private bandit14@bandit.labs.overthewire.org -p 2220``` dimana ```-i``` untuk menandakan bahwa kita pakai private key untuk autentikasi
+
+---
+## Level 14
+<Callout>
+The password for the next level can be retrieved by submitting the password of the current level to port 30000 on localhost.
+</Callout>
+```bash
+❯ ssh -i sshkey.private bandit14@bandit.labs.overthewire.org -p 2220 
+
+bandit14@bandit:~$ cat /etc/bandit_pass/bandit14 | nc localhost 30000
+Correct!
+8xCjnmgoKbGLhHFAZlGE5Tmu4M2tKJQo
+```
+di level ini kita diharuskan menggunakan password level ini ke port 30000 localhost, seperti yang diketahui dari soal sebelumnya, bahwa password dari level 14 ini disimpan di /etc/bandit_pass/bandit14  
+maka kita akan gunakan netcat ```nc``` untuk menemukan password level selanjutnya
+<Callout>
+```nc``` (netcat) adalah tool di Unix yang dapat membaca dan menuliskan data melalui jaringan, menggunakan protokol TCP atau UDP  
+cara menggunakan nc adalah seperti berikut : ```nc host port````
+</Callout>
+disini kita juga menggunakan ```cat``` diawal, unutuk mengeluarkan output dari file ```/etc/bandit_pass/bandit14``` dan kemudian dikirim otomatis ke netcatnya, jika tanpa pipe ```|``` dan ```cat``` akan seperti ini:
+```bash
+bandit14@bandit:~$ cat /etc/bandit_pass/bandit14 
+MU4VWeTyJk8ROof1qqmcBPaLh7lDCPvS
+bandit14@bandit:~$ nc localhost 30000
+MU4VWeTyJk8ROof1qqmcBPaLh7lDCPvS
+Correct!
+8xCjnmgoKbGLhHFAZlGE5Tmu4M2tKJQo
+```
+
+---
+## Level 15
+<Callout>
+The password for the next level can be retrieved by submitting the password of the current level to port 30001 on localhost using SSL/TLS encryption.  
+Helpful note: Getting “DONE”, “RENEGOTIATING” or “KEYUPDATE”? Read the “CONNECTED COMMANDS” section in the manpage.
+</Callout>
+```bash
+❯ ssh bandit15@bandit.labs.overthewire.org -p 2220
+
+bandit15@bandit:~$ cat /etc/bandit_pass/bandit15 | openssl s_client -connect localhost:30001 -quiet
+Can't use SSL_get_servername
+depth=0 CN = SnakeOil
+verify error:num=18:self-signed certificate
+verify return:1
+depth=0 CN = SnakeOil
+verify return:1
+Correct!
+kSkvUpMQ7lBYyCM4GBPvCvT1BfWRy0Dx
+```
+Pada level ini kita diminta untuk mengirimkan password level saat ini ke sebuah service yang berjalan di port 30001 pada localhost.  
+Berbeda dengan level sebelumnya yang menggunakan koneksi TCP biasa, kali ini service tersebut menggunakan SSL/TLS encryption.  
+Seperti yang diketahui dari level sebelumnya, password untuk bandit15 tersimpan di ```/etc/bandit_pass/bandit15```  
+Karena koneksi yang diminta menggunakan SSL, maka kita tidak bisa lagi menggunakan ```nc``` (netcat) seperti sebelumnya. Jika tetap menggunakan nc, koneksi akan gagal karena server mengharapkan proses TLS handshake terlebih dahulu.
+Untuk terhubung ke service yang menggunakan SSL/TLS, kita dapat menggunakan ```openssl s_client``` cara dasarnya seperti berikut:
+```bash
+openssl s_client -connect host:port
+```
+Karena password berada di dalam file /etc/bandit_pass/bandit15, maka kita perlu:
+- Mengambil isi file tersebut seperti level sebelumnya
+- Mengirimkannya melalui koneksi SSL ke port 30001
+```bash 
+cat /etc/bandit_pass/bandit15 | openssl s_client -connect localhost:30001 -quiet
+```
+```-quiet``` disini berfungsi untuk mengurangi output debug seperti informasi sertifikat dan detail handshake, sehingga hanya menampilkan respons dari server.
+
+---
+## Level 16
+<Callout>
+The credentials for the next level can be retrieved by submitting the password of the current level to a port on localhost in the range 31000 to 32000. First find out which of these ports have a server listening on them. Then find out which of those speak SSL/TLS and which don’t. There is only 1 server that will give the next credentials, the others will simply send back to you whatever you send to it.  
+Helpful note: Getting “DONE”, “RENEGOTIATING” or “KEYUPDATE”? Read the “CONNECTED COMMANDS” section in the manpage.
+</Callout>
+```bash
+❯ ssh bandit16@bandit.labs.overthewire.org -p 2220
+
+bandit16@bandit:~$ nmap -p 31000-32000 localhost
+Starting Nmap 7.94SVN ( https://nmap.org ) at 2026-02-19 03:42 UTC
+Nmap scan report for localhost (127.0.0.1)
+Host is up (0.00012s latency).
+Not shown: 996 closed tcp ports (conn-refused)
+PORT      STATE SERVICE     VERSION
+31046/tcp open  echo
+31518/tcp open  ssl/echo
+31691/tcp open  echo
+31790/tcp open  ssl/unknown
+31960/tcp open  echo
+
+Nmap done: 1 IP address (1 host up) scanned in 145.11 seconds
+
+bandit16@bandit:~$ cat /etc/bandit_pass/bandit16 | openssl s_client -connect localhost:31790 -quiet
+Can't use SSL_get_servername
+depth=0 CN = SnakeOil
+verify error:num=18:self-signed certificate
+verify return:1
+depth=0 CN = SnakeOil
+verify return:1
+Correct!
+-----BEGIN RSA PRIVATE KEY-----
+MIIEogIBAAKCAQEAvmOkuifmMg6HL2YPIOjon6iWfbp7c3jx34YkYWqUH57SUdyJ
+imZzeyGC0gtZPGujUSxiJSWI/oTqexh+cAMTSMlOJf7+BrJObArnxd9Y7YT2bRPQ
+Ja6Lzb558YW3FZl87ORiO+rW4LCDCNd2lUvLE/GL2GWyuKN0K5iCd5TbtJzEkQTu
+DSt2mcNn4rhAL+JFr56o4T6z8WWAW18BR6yGrMq7Q/kALHYW3OekePQAzL0VUYbW
+JGTi65CxbCnzc/w4+mqQyvmzpWtMAzJTzAzQxNbkR2MBGySxDLrjg0LWN6sK7wNX
+x0YVztz/zbIkPjfkU1jHS+9EbVNj+D1XFOJuaQIDAQABAoIBABagpxpM1aoLWfvD
+KHcj10nqcoBc4oE11aFYQwik7xfW+24pRNuDE6SFthOar69jp5RlLwD1NhPx3iBl
+J9nOM8OJ0VToum43UOS8YxF8WwhXriYGnc1sskbwpXOUDc9uX4+UESzH22P29ovd
+d8WErY0gPxun8pbJLmxkAtWNhpMvfe0050vk9TL5wqbu9AlbssgTcCXkMQnPw9nC
+YNN6DDP2lbcBrvgT9YCNL6C+ZKufD52yOQ9qOkwFTEQpjtF4uNtJom+asvlpmS8A
+vLY9r60wYSvmZhNqBUrj7lyCtXMIu1kkd4w7F77k+DjHoAXyxcUp1DGL51sOmama
++TOWWgECgYEA8JtPxP0GRJ+IQkX262jM3dEIkza8ky5moIwUqYdsx0NxHgRRhORT
+8c8hAuRBb2G82so8vUHk/fur85OEfc9TncnCY2crpoqsghifKLxrLgtT+qDpfZnx
+SatLdt8GfQ85yA7hnWWJ2MxF3NaeSDm75Lsm+tBbAiyc9P2jGRNtMSkCgYEAypHd
+HCctNi/FwjulhttFx/rHYKhLidZDFYeiE/v45bN4yFm8x7R/b0iE7KaszX+Exdvt
+SghaTdcG0Knyw1bpJVyusavPzpaJMjdJ6tcFhVAbAjm7enCIvGCSx+X3l5SiWg0A
+R57hJglezIiVjv3aGwHwvlZvtszK6zV6oXFAu0ECgYAbjo46T4hyP5tJi93V5HDi
+Ttiek7xRVxUl+iU7rWkGAXFpMLFteQEsRr7PJ/lemmEY5eTDAFMLy9FL2m9oQWCg
+R8VdwSk8r9FGLS+9aKcV5PI/WEKlwgXinB3OhYimtiG2Cg5JCqIZFHxD6MjEGOiu
+L8ktHMPvodBwNsSBULpG0QKBgBAplTfC1HOnWiMGOU3KPwYWt0O6CdTkmJOmL8Ni
+blh9elyZ9FsGxsgtRBXRsqXuz7wtsQAgLHxbdLq/ZJQ7YfzOKU4ZxEnabvXnvWkU
+YOdjHdSOoKvDQNWu6ucyLRAWFuISeXw9a/9p7ftpxm0TSgyvmfLF2MIAEwyzRqaM
+77pBAoGAMmjmIJdjp+Ez8duyn3ieo36yrttF5NSsJLAbxFpdlc1gvtGCWW+9Cq0b
+dxviW8+TFVEBl1O4f7HVm6EpTscdDxU+bCXWkfjuRb7Dy9GOtt9JPsX8MBTakzh3
+vBgsyi/sN3RqRBcGU40fOoZyfAMT8s1m/uYv52O6IgeuZ/ujbjY=
+-----END RSA PRIVATE KEY-----
+```
+Pada level ini kita diberitahu bahwa terdapat sebuah service yang berjalan di antara port 31000–32000 pada localhost. Salah satu dari port tersebut menggunakan SSL/TLS dan akan memberikan private key apabila kita mengirimkan password yang benar.  
+Karena tidak diketahui port mana yang aktif, maka kita lakukan scanning port yang terbuka terlebih dahulu, menggunakan nmap:
+```bash
+nmap -sV localhost -p 31000-32000
+```
+outputnya menghasilkan port-port yang terbuka pada rentang yang kita cari tadi, dan juga akan ada rincian service dari masing masing port, selanjutnya kita tinggal hubungkan saja dengan port SSL tersebut seperti level sebelumnya:
+```bash
+cat /etc/bandit_pass/bandit16 | openssl s_client -connect localhost:31790 -quiet
+```
+dari situ kita akan menemukan private key RSA
+
+---
+## Level 17
+untuk mengkoneksikan ke level ini, kita perlu menyimpan private key yang ditemukan dari <a href="#level-16">Level 16</a>, kedalam sebuah file, dan mengatur permission file tersebut seperti yang ada pada <a href="#level-13">level 13</a>
+```bash
+❯ nano privatekey
+
+❯ chmod 400 privatekey 
+❯ ssh -i privatekey bandit17@bandit.labs.overthewire.org -p 2220
+
+bandit17@bandit:~$ 
+```
+<Callout>
+There are 2 files in the homedirectory: passwords.old and passwords.new. The password for the next level is in passwords.new and is the only line that has been changed between passwords.old and passwords.new  
+NOTE: if you have solved this level and see ‘Byebye!’ when trying to log into bandit18, this is related to the next level, bandit19
+</Callout>
+```bash
+bandit17@bandit:~$ ls       
+passwords.new  passwords.old
+bandit17@bandit:~$ diff passwords.new passwords.old 
+42c42
+< x2gLTTjFwMOhQ8oWNbMN362QKxfRqGlO
+---
+> BMIOFKM7CRSLI97voLp3TD80NAq5exxk
+```
+sesuai dengan soal Password untuk level berikutnya ada di ```passwords.new``` dan merupakan satu-satunya baris yang berbeda dibanding ```passwords.old```  
+maka kita bisa menggunakan ```diff``` untuk membandingkan dua file dan menampilkan bagian yang berbeda, sehingga ditemukan, bagian yang berbeda di ```passwords.new``` adalah 
+```bash
+x2gLTTjFwMOhQ8oWNbMN362QKxfRqGlO
+```
+
+---
+## Level 18
+<Callout>
+The password for the next level is stored in a file readme in the homedirectory. Unfortunately, someone has modified .bashrc to log you out when you log in with SSH.
+</Callout>
+```bash
+❯ ssh bandit18@bandit.labs.overthewire.org -p 2220 ls
+                         _                     _ _ _   
+                        | |__   __ _ _ __   __| (_) |_ 
+                        | '_ \ / _` | '_ \ / _` | | __|
+                        | |_) | (_| | | | | (_| | | |_ 
+                        |_.__/ \__,_|_| |_|\__,_|_|\__|
+                                                       
+
+                      This is an OverTheWire game server. 
+            More information on http://www.overthewire.org/wargames
+
+backend: gibson-0
+bandit18@bandit.labs.overthewire.org's password: 
+readme
+
+❯ ssh bandit18@bandit.labs.overthewire.org -p 2220 cat readme
+                         _                     _ _ _   
+                        | |__   __ _ _ __   __| (_) |_ 
+                        | '_ \ / _` | '_ \ / _` | | __|
+                        | |_) | (_| | | | | (_| | | |_ 
+                        |_.__/ \__,_|_| |_|\__,_|_|\__|
+                                                       
+
+                      This is an OverTheWire game server. 
+            More information on http://www.overthewire.org/wargames
+
+backend: gibson-0
+bandit18@bandit.labs.overthewire.org's password: 
+cGWpMaKXVwDUNgPAVJbWYuGHVn9zl3j8
+```
+di level ini, setelah kita memasukan password yang benar, maka koneksi kita akan terputus, sehingga kita bisa langsung menggunakan command yang ingin kita gunakan sebelum memasukan password, dengan menambahkannya di bagian belakang syntax SSH
+
+---
+## Level 19
+<Callout>
+To gain access to the next level, you should use the setuid binary in the homedirectory. Execute it without arguments to find out how to use it. The password for this level can be found in the usual place (/etc/bandit_pass), after you have used the setuid binary.
+</Callout>
+```bash
+❯ ssh bandit19@bandit.labs.overthewire.org -p 2220
+
+bandit19@bandit:~$ ls
+bandit20-do
+bandit19@bandit:~$ ./bandit20-do 
+Run a command as another user.
+  Example: ./bandit20-do whoami
+bandit19@bandit:~$ ./bandit20-do whoami
+bandit20
+bandit19@bandit:~$ ./bandit20-do cat /etc/bandit_pass/bandit20 
+0qXahG8ZjOVMN9Ghs7iOWsCfZyXOUbYO
+```
+dari soal dapat diketahui bahwa ada satu file executable dan password untuk ke level selanjutnya tersimpan di /etc/bandit_pass  
+dan dari percobaan dengan command ```whoami``` dapat diketahui bahwa binary ini adalah user bandit20 sehingga kita bisa melihat password bandit20 juga menggunakan binary tersebut ```cat /etc/bandit_pass/bandit20```
+
+---
+## Level 20
+<Callout>
+There is a setuid binary in the homedirectory that does the following: it makes a connection to localhost on the port you specify as a commandline argument. It then reads a line of text from the connection and compares it to the password in the previous level (bandit20). If the password is correct, it will transmit the password for the next level (bandit21).  
+NOTE: Try connecting to your own network daemon to see if it works as you think
+</Callout>
+setelah masuk kedalam server dengan ssh, selanjutnya jalankan perintah ```tmux```
+tmux (Terminal Multiplexer) adalah tool di Linux yang memungkinkan kamu menjalankan banyak sesi terminal dalam satu window dan tetap berjalan walaupun koneksi terputus (misalnya SSH ke server).
+```bash
+bandit20@bandit:~$ tmux
+```
+kalian akan melihat tampilan seperti ini setelah menjalankan perintah itu:
+![bandit20](/bandit20-1.webp)
+setelah itu tekan ```ctrl + b``` kemudian tekan ```c``` untuk menambah tab/jendela baru
+![bandit20](/bandit20-2.webp)
+untuk berpindah tab, bisa tekan ```ctrl + b``` kemudian tekan angka di keyboard sesuai nomer tabnya  
+di tab pertama kita akan membuat TCP server :
+```bash
+bandit20@bandit:~$ nc -lv 1040
+Listening on 0.0.0.0 1040
+```
+kemudian di tab kedua akan kita jadikan client dimana kita akan menjalankan file ```suconnect``` ke port server (tab pertama):
+```bash
+bandit20@bandit:~$ ./suconnect 1040
+```
+di server (tab 1) kalian akan melihat notifikasi:
+```bash
+bandit20@bandit:~$ nc -lv 1040
+Listening on 0.0.0.0 1040
+Connection received on localhost 54730
+```
+kemudian masukan password dari level sebelumnya untuk dikirim ke client:
+```bash 
+bandit20@bandit:~$ nc -lv 1040
+Listening on 0.0.0.0 1040
+Connection received on localhost 54730
+0qXahG8ZjOVMN9Ghs7iOWsCfZyXOUbYO // password level sebelumnya
+EeoULMCra2q0dSkYj561DX7s1CpBuOBt // output (password lv 21)
+```
+
+
