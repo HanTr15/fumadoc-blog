@@ -48,16 +48,32 @@ export async function generateStaticParams() {
   return docsSource.generateParams();
 }
 
-export async function generateMetadata(props: PageProps<'/docs/[[...slug]]'>): Promise<Metadata> {
+export async function generateMetadata(
+  props: PageProps<'/docs/[[...slug]]'>
+) {
   const params = await props.params;
-  const page = docsSource.getPage(params.slug);
-  if (!page) notFound();
+  const slug = params.slug ?? [];
 
+  const page = docsSource.getPage(slug);
+  if (!page) return {};
+
+  const slugPath = slug.join("/");
   return {
+    alternates: {
+      canonical: `https://ryosta.my.id/docs/${slugPath}`,
+    },
     title: page.data.title,
     description: page.data.description,
     openGraph: {
-      images: getPageImage(page).url,
+      title: page.data.title,
+      description: page.data.description,
+      url: `https://ryosta.my.id/docs/${slugPath}`,
+      type: "article",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: page.data.title,
+      description: page.data.description,
     },
   };
 }
