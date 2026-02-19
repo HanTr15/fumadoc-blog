@@ -68,7 +68,7 @@ export default function HomePage() {
           <span className="text-yellow-600 dark:text-yellow-400">
             <TypeAnimation
               sequence={[
-                "My Name is Hamdan",
+                "My Name is Hamdan Trisnawan",
                 2000,
                 "Also Known As ryosta",
                 2000,
@@ -130,7 +130,7 @@ export default function HomePage() {
             </span>
 
             <p className="text-lg leading-relaxed">
-              I'm Hamdan, also known as ryosta. A student deeply interested in
+              I'm Hamdan Trisnawan, also known as ryosta. A student deeply interested in
               Cyber Security and software development. I enjoy breaking systems
               to understand how they work - then rebuilding them better and more secure.
             </p>

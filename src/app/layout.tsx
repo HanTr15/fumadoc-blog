@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/og.png", // ✅ pakai ini
+        url: "/og.png", 
         width: 1200,
         height: 630,
       },
@@ -45,7 +45,7 @@ export const metadata: Metadata = {
     title: "Ryosta",
     description:
       "Cybersecurity notes, CTF writeups, and technical documentation.",
-    images: ["/og.png"], // ✅ tambahin ini biar twitter kebaca
+    images: ["/og.png"],
   },
 
   icons: {
