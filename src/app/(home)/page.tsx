@@ -10,7 +10,7 @@ import {
 } from "lucide-react";
 import { TypeAnimation } from "react-type-animation";
 import { docsSource, blogSource } from "@/lib/source"; // pastikan blogSource ada
-
+<meta name="google-site-verification" content="llMqtgOirlqPEn0bHY3eoDtrASjabkCE4WvVJreEAtc" />
 const socials = [
   { icon: Github, url: "https://github.com/HanTr15" },
   { icon: Linkedin, url: "https://linkedin.com/in/hamdantr" },
