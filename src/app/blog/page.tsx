@@ -2,77 +2,67 @@ import Link from "next/link";
 import { blogSource } from "@/lib/source";
 
 export default async function BlogPage() {
-    const posts = blogSource.getPages();
+  const posts = blogSource.getPages();
 
-    return (
-        <div className="mx-auto max-w-7xl px-6 py-20">
+  return (
+    <main className="
+      min-h-screen
+      bg-gradient-to-b
+      from-white via-yellow-50/40 to-white
+      dark:from-black dark:via-zinc-950 dark:to-black
+      text-zinc-900 dark:text-white
+    ">
 
-            {/* HEADER */}
-            <div className="text-center mb-24">
-                <h1 className="text-4xl font-semibold tracking-wide">
-                    | Blog |
-                </h1>
-                <p className="text-muted-foreground mt-4">
-                    Tulisan dan eksperimen seputar cyber security.
+      <section className="max-w-6xl mx-auto px-6 pt-28 pb-24">
+
+        {/* HEADER */}
+        <div className="text-center mb-20">
+          <h1 className="text-4xl font-semibold tracking-wide">
+            | Blog |
+          </h1>
+
+          <p className="text-muted-foreground mt-4">
+            Blog seputar networking, cybersecurity & software developing.
+          </p>
+        </div>
+
+        {/* GRID */}
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+
+          {posts.map((post) => (
+            <Link
+              key={post.url}
+              href={`/blog/${post.slugs.join("/")}`}
+              className="
+                p-6 rounded-2xl
+                border border-zinc-200 dark:border-zinc-800
+                bg-white dark:bg-zinc-900
+                hover:border-yellow-400
+                hover:shadow-[0_0_25px_rgba(234,179,8,0.15)]
+                hover:-translate-y-1
+                transition duration-300
+              "
+            >
+              <h3 className="text-lg font-semibold mb-2 line-clamp-2">
+                {post.data.title}
+              </h3>
+
+              <p className="text-sm text-zinc-600 dark:text-zinc-400 line-clamp-3">
+                {post.data.description}
+              </p>
+
+              {post.data.date && (
+                <p className="text-xs mt-4 text-yellow-600 dark:text-yellow-400">
+                  {post.data.date}
                 </p>
-            </div>
-
-            {/* GRID WRAPPER */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16">
-
-                {posts.map((post, index) => (
-                    <div key={post.url} className="group relative">
-
-                        {/* CARD OVERLAY */}
-                        <div
-                            className="
-      relative
-      -mt-20
-      mx-8
-      bg-background
-      border
-      shadow-lg
-      p-8
-      z-10
-    "
-                        >
-                            {/* NUMBER */}
-                            <p className="text-xs text-muted-foreground mb-3">
-                                {(index + 1).toString().padStart(3, "0")}
-                            </p>
-
-                            {/* TITLE */}
-                            <h3 className="text-lg font-semibold mb-4">
-                                {post.data.title}
-                            </h3>
-
-                            {/* DESC */}
-                            <p className="text-sm text-muted-foreground mb-6">
-                                {post.data.description}
-                            </p>
-
-                            {/* BUTTON */}
-                            <Link
-                                href={`/blog/${post.slugs[0]}`}
-                                className="
-        inline-block
-        border
-        px-4 py-2
-        text-xs
-        hover:bg-foreground hover:text-background
-        transition
-      "
-                            >
-                                Read
-                            </Link>
-                        </div>
-
-                    </div>
-
-                ))}
-
-            </div>
+              )}
+            </Link>
+          ))}
 
         </div>
-    );
+
+      </section>
+
+    </main>
+  );
 }

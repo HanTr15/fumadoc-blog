@@ -81,7 +81,7 @@ export default async function Page({ params }: Props) {
   const MDX = page.data.body;
 
   return (
-    <div className="max-w-3xl mx-auto px-6 pt-5 py-20">
+    <div className="w-full max-w-3xl mx-auto px-4 sm:px-6 pt-5 py-20">
       <div className="mb-8">
         <InlineTOC items={page.data.toc}>
           Table of Contents
